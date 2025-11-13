@@ -377,10 +377,6 @@ impl ComponentInterface {
                 let crate_name = module_path.split("::").next().unwrap_or(module_path);
                 self.crate_to_namespace.get(crate_name)
             })
-            .map(|n| n.name.as_ref())
-            // incase not library mode and we've not been told
-            .or_else(|| (module_path == self.crate_name()).then(|| self.namespace()))
-            .ok_or_else(|| anyhow!("unresolved module path {module_path}"))
     }
 
     /// Iterate over all types contained in the given item.
